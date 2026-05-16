@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<title>معايدة العيد</title>
+</head>
+
+<body style="text-align:center; font-family:Arial;">
+
+<h2>اكتب اسمك وخذ معايدتك 🎉</h2>
+
+<input type="text" id="name" placeholder="اكتب اسمك هنا">
+<br><br>
+
+<button onclick="generate()">تحميل الصورة</button>
+
+<canvas id="canvas" width="1080" height="1350" style="display:none;"></canvas>
+
+<script>
+function generate() {
+  var name = document.getElementById("name").value;
+
+  var canvas = document.getElementById("canvas");
+  var ctx = canvas.getContext("2d");
+
+  var img = new Image();
+  img.src = "card.png";
+
+  img.onload = function () {
+    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+
+    ctx.font = "45px Arial";
+    ctx.fillStyle = "#244c52";
+    ctx.textAlign = "center";
+
+    ctx.fillText(name, canvas.width / 2, 1120);
+
+    var link = document.createElement('a');
+    link.download = 'Eid_Greeting.png';
+    link.href = canvas.toDataURL();
+    link.click();
+  }
+}
+</script>
+
+</body>
+</html>

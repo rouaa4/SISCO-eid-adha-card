@@ -1,23 +1,54 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar">
 <head>
 <meta charset="UTF-8">
 <title>Eid Greeting</title>
+
+<style>
+body {
+  text-align: center;
+  font-family: Arial;
+  background: #f5f5f5;
+}
+
+h2 {
+  font-size: 28px;
+}
+
+input {
+  padding: 12px;
+  width: 260px;
+  font-size: 16px;
+}
+
+button {
+  padding: 12px 25px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+canvas {
+  margin-top: 20px;
+  border-radius: 10px;
+}
+</style>
+
 </head>
 
-<body style="text-align:center; font-family:Arial;">
+<body>
 
 <h2>🎉 اكتب اسمك / Enter Your Name</h2>
 
-<input type="text" id="name" placeholder="اكتب اسمك / Type your name" oninput="preview()" style="padding:10px; width:250px;">
-<br><br>
+<input type="text" id="name" placeholder="اكتب اسمك / Type your name" oninput="preview()">
 
-<button onclick="download()" style="padding:10px 20px; font-size:16px;">
-تحميل / Download
-</button>
+<br>
 
-<br><br>
+<button onclick="download()">تحميل / Download</button>
 
+<br>
+
+<!-- ✅ هنا الصورة تظهر -->
 <canvas id="canvas" width="1080" height="1350"></canvas>
 
 <script>
@@ -25,40 +56,36 @@ var canvas = document.getElementById("canvas");
 var ctx = canvas.getContext("2d");
 
 var img = new Image();
-img.src = "card.png";
+img.src = "card.png"; // اسم الصورة
 
-// أول تحميل
 img.onload = function () {
   draw("");
 };
 
-// ✅ عرض الاسم مباشرة
 function preview() {
   var name = document.getElementById("name").value;
   draw(name);
 }
 
-// ✅ رسم الصورة + الاسم
 function draw(name) {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 
-  // إعداد الخط (كبير + عريض)
-  ctx.font = "bold 70px Arial";
+  // ✅ خط أكبر + عريض جداً
+  ctx.font = "bold 80px Arial";
   ctx.fillStyle = "#0f2f35";
   ctx.textAlign = "center";
 
-  // ظل خفيف
-  ctx.shadowColor = "rgba(0,0,0,0.3)";
-  ctx.shadowBlur = 4;
+  // ✅ ظل أقوى
+  ctx.shadowColor = "rgba(0,0,0,0.4)";
+  ctx.shadowBlur = 6;
   ctx.shadowOffsetX = 2;
-  ctx.shadowOffsetY = 2;
+  ctx.shadowOffsetY = 3;
 
-  // كتابة الاسم
+  // ✅ كتابة الاسم
   ctx.fillText(name, canvas.width / 2, 1120);
 }
 
-// ✅ تحميل الصورة
 function download() {
   var link = document.createElement('a');
   link.download = 'Eid_Greeting.png';
